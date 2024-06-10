@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}ホーム{% endblock title %}
+
+{% block content %}
+  <h1>はいくポスト</h1>
+  {% if user.is_authenticated %}
+    <p>ようこそ {{ user.username }}!</p>
+  {% else %}
+  <img class="welcome-image" src="{% static 'images/hawk.png' %}">
+  <p>ログインしてください。</p>
+  <a href="{% url 'account_login' %}" class="btn btn-primary">ログイン</a>
+  <a href="{% url 'account_signup' %}" class="btn btn-secondary">サインアップ</a>
+  {% endif %}
+{% endblock content %}

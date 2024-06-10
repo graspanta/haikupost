@@ -1,0 +1,48 @@
+{% extends "_base.html" %}
+
+{% block title %}よむ{% endblock title %}
+
+{% block content %}
+
+  <div class="mb-3">
+    <form action="{% url 'search_results' %}" method="get">
+      <input name="q" type="text" placeholder="けんさく" aria-label="Search">
+    </form>
+  </div>
+
+  {% for haiku in haiku_list %}
+    <div class="card">
+      <div class="card-header">
+        <h2 class="font-weight-bold p-2 text-dark"><a href="{{ haiku.get_absolute_url }}">{{ haiku.poem }}</a></h2>
+      </div>
+      <div class="card-body">
+        <span class="text-muted">by {{ haiku.author }} | {{ haiku.created_at|date:"Y-m-j H:i:s" }}</span>
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; はじめ</a>
+            <a href="?page={{ page_obj.previous_page_number }}">まえ</a>
+        {% endif %}
+
+        <span class="current">
+            {% for num in page_obj.page_range %}
+              {% if page_obj.number == num %}
+                <span>{{ num }}</span>
+              {% else %}
+                <a href="?page={{ num }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}   
+            {% comment %} Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. {% endcomment %}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">つぎ</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">さいご &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock content %}

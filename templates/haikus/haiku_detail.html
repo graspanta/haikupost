@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ haiku.poem }}{% endblock title %}
+
+{% block content %}
+  <div class="haiku-detail">
+    <h2><a href="">{{ haiku.poem }}</a></h2>
+    <div>
+    <span>by {{ haiku.author }}</span>
+    </div>
+    {% if haiku.image %}
+      <img class="haiku-image" src="{{ haiku.image.url }}" alt="{{ haiku.poem }}">
+    {% endif %}
+    {% if haiku.description %}
+      <h3>{{ haiku.description }}</h3>
+    {% endif %}
+    <div>
+      <ol>
+      {% for review in haiku.reviews.all %}
+        <li><h5>{{ review.review }} ({{ review.author }} | {{ haiku.created_at|date:"Y-m-j H:i:s" }})</h5></li>
+      {% endfor %}
+      </ol>
+    </div>
+
+  </div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "_base.html" %} 
+{% load static %}
+
+{% block title %}つくる{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div>
+      <form action="" method="post" enctype='multipart/form-data'>{% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <button class="btn btn-primary" type="submit">おくる</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

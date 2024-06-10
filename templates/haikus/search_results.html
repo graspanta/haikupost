@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+
+{% block title %}けんさく{% endblock title %}
+
+{% block content %}
+  <h2>けんさくけっか</h2>
+  {% for haiku in haiku_list %}
+    <div>
+      <h3><a href="{{ haiku.get_absolute_url }}">{{ haiku.poem }}</a></h3>
+      <h4>by {{ haiku.author }}</h4>
+    </div>
+  {% endfor %}
+{% endblock content %}
